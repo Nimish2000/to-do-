@@ -1,0 +1,49 @@
+.text-box{
+  text-align: center;
+  border: 1in;
+  gap: 1em;
+  margin: 20px;
+}
+
+.text-box input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.text-box button{
+ 
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin: 10px;
+  color: black;
+  background-color: lightgrey;
+}
+
+.card-body{
+  display: flex;
+  justify-content: space-between;
+}
+
+label{
+  padding-left: 6px;
+}
+
+.row{
+  margin: 12px;
+}
+
+.subtask-list{
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-btn{
+  color: red;
+  background-color: red;
+}
+
+.subtask-content{
+  display: flex;
+}
