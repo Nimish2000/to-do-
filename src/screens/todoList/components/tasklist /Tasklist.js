@@ -2,15 +2,23 @@ import React from "react";
 import { useState } from "react";
 import uuid from "react-uuid";
 import remove from "lodash/remove";
+import reject from "lodash/reject";
+import SideNavbar from "../sideNavbar";
+import Button from "../../../../components/Button/Button";
+import Card from "../card";
 import "./Tasklist.css";
 
-function Tasklist() {
+function Tasklist({ isEnable, enableSideBar }) {
   // state variable defined to adapt to change
 
   const [taskTitle, setTaskTitle] = useState("");
   const [descriptionName, setDescriptionName] = useState("");
+  const [priorityName, setPriorityName] = useState("low");
   const [subTasks, setSubTasks] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [errors, setErros] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filterTask, setFilterTask] = useState("tasks");
 
   // functions to handle various changes
 
@@ -20,6 +28,14 @@ function Tasklist() {
 
   const handleDescriptionName = (event) => {
     setDescriptionName(event.target.value);
+  };
+
+  const handlePriorityChange = (event) => {
+    setPriorityName(event.value);
+  };
+
+  const handleFilterChange = (event) => {
+    setFilterTask(event.target.value);
   };
 
   const handleSubTaskName = (event) => {
@@ -56,15 +72,37 @@ function Tasklist() {
       return alert("Please enter title name");
     }
 
+    console.log("in add task");
+
+    var hasError = false;
+
+    subTasks.map((obj, index) => {
+      if (obj.title === "") {
+        hasError = true;
+        setErros([...errors], (errors[index] = true));
+      } else {
+        setErros([...errors], (errors[index] = false));
+      }
+    });
+    console.log(errors);
+    if (hasError) return;
+    const filteredSubTask = reject(subTasks, function (n) {
+      return n.title === "";
+    });
+
     const newTask = {
       id: uuid(),
+      priority: priorityName,
       title: taskTitle,
       description: descriptionName,
-      subTask: subTasks,
+      subTask: filteredSubTask,
       completed: false,
     };
 
-    setTasks([...tasks, newTask]);
+    console.log(newTask);
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setErros([]);
+    setIsModalOpen(false);
     setTaskTitle("");
     setDescriptionName("");
     setSubTasks([]);
@@ -113,12 +151,6 @@ function Tasklist() {
     }
   };
 
-  const deleteSubTask = () => {};
-
-  const showTask = () => {
-    console.log(tasks);
-  };
-
   const handleTaskDelete = (taskId) => {
     const updatedTasks = [...tasks];
 
@@ -129,112 +161,59 @@ function Tasklist() {
     );
   };
 
+  const modalOpen = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const showTasks = () => {
+    console.log(tasks);
+  };
+
   return (
-    <>
-      <form className="text-box" onSubmit={handleAddTask}>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Enter title"
-            value={taskTitle}
-            onChange={handleTaskTitle}
-          ></input>
-        </div>
-        <div className="form-group">
-          <textarea
-            className="form-control my-3"
-            placeholder="Enter description"
-            value={descriptionName}
-            onChange={handleDescriptionName}
-            rows="5"
-          ></textarea>
-        </div>
-        {subTasks.map((item) => {
+    <div className="mainScreen">
+      {isEnable && (
+        <SideNavbar
+          enableSideBar={enableSideBar}
+          isEnable={isEnable}
+          handleAddSubTask={handleAddSubTask}
+          descriptionName={descriptionName}
+          errors={errors}
+          handleAddTask={handleAddTask}
+          handleDescriptionName={handleDescriptionName}
+          taskTitle={taskTitle}
+          handleTaskTitle={handleTaskTitle}
+          subTasks={subTasks}
+          handleSubTaskName={handleSubTaskName}
+          modalIsOpen={isModalOpen}
+          handleModal={modalOpen}
+          closeModal={closeModal}
+          priorityName={priorityName}
+          setPriorityName={setPriorityName}
+          handlePriorityChange={handlePriorityChange}
+          handleFilterChange={handleFilterChange}
+        />
+      )}
+      <div className="right-screen">
+        {tasks.map((item) => {
           return (
-            <input
-              key={item.sid}
-              type="text"
-              id={item.sid || "0"}
-              placeholder="Enter sub-task"
-              onChange={handleSubTaskName}
+            <Card
+              completed={item.completed}
+              description={item.description}
+              handleCheckBox={handleCheckBox}
+              handleTaskDelete={handleTaskDelete}
+              id={item.id}
+              title={item.title}
+              priority={item.priority}
+              subTask={item.subTask}
+              key={item.id}
             />
           );
         })}
-
-        <button type="submit" className="btn btn-primary">
-          Add-Task
-        </button>
-        <button
-          type="button"
-          onClick={handleAddSubTask}
-          className="btn btn-primary"
-        >
-          Sub-task
-        </button>
-        {/* 
-        <button type="button" onClick={showTask} className="btn btn-primary">
-          show tasks
-        </button> */}
-      </form>
-
-      <div className="row row-cols-1 row-cols-md-4 g-4">
-        {tasks.map((item) => (
-          <div className="col" key={item.id}>
-            <div className="card h-100">
-              <div className="card-body">
-                <div className="left-card-body">
-                  {item.completed ? (
-                    <h5 className="card-title" style={{ color: "black" }}>
-                      <del>{item.title}</del>
-                    </h5>
-                  ) : (
-                    <h5 className="card-title" style={{ color: "black" }}>
-                      <u>{item.title}</u>
-                    </h5>
-                  )}
-                  {item.completed ? (
-                    <p className="card-text" style={{ color: "black" }}>
-                      <del>{item.description}</del>
-                    </p>
-                  ) : (
-                    <p className="card-text" style={{ color: "black" }}>
-                      {item.description}
-                    </p>
-                  )}
-                  <ul className="list-group list-group-flush">
-                    {item.subTask.map((val) => {
-                      return (
-                        <li key={val.sid} className="list-group-item">
-                          <input
-                            type="checkbox"
-                            id="check"
-                            checked={val.completed}
-                            onChange={() => handleCheckBox(item.id, val.sid)}
-                          />
-                          <label htmlFor="check" style={{ color: "black" }}>
-                            {val.title}
-                          </label>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <br />
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => handleTaskDelete(item.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
-    </>
+    </div>
   );
 }
 

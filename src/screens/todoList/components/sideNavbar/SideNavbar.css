@@ -1,0 +1,145 @@
+.sideNavbar{
+    display: flex;
+    flex-direction: column;
+    width: 26%;
+    height: 98vh;
+    background-color: #ffff;
+    margin-top: 0px;
+    padding-top: 10px;
+}
+
+.btn-sidenavbar{
+    width: 100%;
+    height: 50px;
+    background: none;
+    padding-left: 15px;
+    border: none;
+    display: flex;
+    word-wrap: wrap;
+    align-items: center;
+}
+
+.material-icons{
+    margin-right: 9px ;
+}
+
+.btn-sidenavbar:hover{
+    background-color: #666;
+  color: white;
+
+}
+
+.navbar-content{
+    padding-top: 8px;
+}
+
+.navbar-title{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.50em;
+    padding-left: 10px;
+
+}
+
+/* .modal{
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: red;
+} */
+
+.modal-select{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em;
+}
+
+
+
+.selector{
+    width: 15%;
+    height: 25%;
+}
+
+.text-box{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.input-text{
+  width: 85%;
+  height: 40px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+}
+
+
+
+.modal-input{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+
+
+.description{
+    width: 100%;
+    height: 150px;
+    margin-top: 10px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+.subtask-input {
+  width: 90%;
+  height: 40px;
+  margin-top: 10px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.modal-footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.subtask{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75em;
+}
+
+button{
+    padding: 4px;
+    margin-right: 5px;
+}

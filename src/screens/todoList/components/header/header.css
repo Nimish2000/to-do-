@@ -1,26 +1,27 @@
 .header {
     color: white;
-    gap: 0px;
     margin-left: 15px;
-    margin-top: 15px;
     display: flex;
-    text-align: center;
-    gap: 0.50em;
-    align-items: baseline;
+    align-items: center;
   }
+
+ .header-components{
+  display: flex;
+  align-items: baseline;
+  gap: 0.50em
+ } 
 
   .header a{
     text-decoration: none;
   }
 
 .header h3{
+  margin-left: 2px;
   color: aqua;
   font-size: 30px;
-
 }
 
 .header h6{
   color: white;
   font-size: 18px;
-
 }

@@ -1,49 +1,19 @@
-.text-box{
-  text-align: center;
-  border: 1in;
-  gap: 1em;
-  margin: 20px;
+.mainScreen{
+  display: flex;
+  justify-content: space-around;
+  height: 100vh;
 }
 
-.text-box input {
+.right-screen{
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-}
-
-.text-box button{
- 
-  border-radius: 12px;
-  box-sizing: border-box;
-  margin: 10px;
-  color: black;
-  background-color: lightgrey;
-}
-
-.card-body{
+  overflow: scroll;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0px;
 }
 
-label{
-  padding-left: 6px;
-}
 
-.row{
-  margin: 12px;
-}
 
-.subtask-list{
-  display: flex;
-  justify-content: space-between;
-}
 
-.delete-btn{
-  color: red;
-  background-color: red;
-}
 
-.subtask-content{
-  display: flex;
-}
+

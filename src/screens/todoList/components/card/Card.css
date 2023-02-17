@@ -1,0 +1,22 @@
+.card{
+    height: 400px;
+    width: 250px;
+    flex-wrap: wrap;
+    overflow: scroll;
+    background-color: white;
+    border-style: solid;
+    margin: 10px;
+    border-radius: 5px ;
+    padding: 20px;
+    word-wrap: break-word;
+  }
+
+  .list-group-item{
+    display: flex;
+    padding-right: 2px;
+    margin: 7px;
+  }
+
+  label{
+    margin-left : 5px;
+  }
