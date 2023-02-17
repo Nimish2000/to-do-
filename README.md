@@ -43,5 +43,5 @@ Start the application (Emulator/Physical device)
 
 ## Authors
 
-- [@nimishbajaj](https://www.github.com/octokatherine)
+- [@nimishbajaj](https://www.github.com/nimish2000)
 
